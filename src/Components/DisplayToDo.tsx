@@ -46,9 +46,9 @@ const styles = StyleSheet.create<Styles>({
   textWrapper: {
     textAlign: 'left',
     fontSize: 16,
-    width: '100%',
+    width: '95%',
     marginTop: 15,
-    marginLeft: 10,
+    marginHorizontal: 10,
     borderBottomColor: 'grey',
     borderBottomWidth: 2,
   },
