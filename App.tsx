@@ -9,6 +9,7 @@ import {
   ViewStyle,
   Dimensions,
   TextStyle,
+  Platform,
 } from 'react-native';
 import {DisplayTodo} from './src/Components/DisplayToDo';
 
@@ -108,7 +109,7 @@ const styles = StyleSheet.create<Styles>({
     backgroundColor: 'grey',
     alignItems: 'center',
     margin: 0,
-    padding: 0,
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
   textWrapper: {
     marginVertical: 20,
