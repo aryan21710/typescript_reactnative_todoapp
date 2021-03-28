@@ -7,23 +7,52 @@ import {
   ViewStyle,
   View,
   FlatList,
+  TextInput,
+  Button,
 } from 'react-native';
 
 interface Styles {
   textWrapper: TextStyle;
   mainWrapper: ViewStyle;
   headingWrapper: TextStyle;
+  inputWrapper: TextStyle;
+  input: ViewStyle;
 }
 
 interface IData {
-  id: string;
-  todo: string;
+  data: {id: string; todo: string}[];
+  search: string;
+  updateSearchHandler: (search: string) => void;
+  onSearchHandler: () => void;
+  todos: string[];
 }
 
-export const DisplayTodo: React.FC<IData[]> = ({data}) => {
+export const DisplayTodo: React.FC<IData> = ({
+  data,
+  search,
+  updateSearchHandler,
+  onSearchHandler,
+  todos,
+}) => {
   return (
     <View style={styles.mainWrapper}>
       <Text style={styles.headingWrapper}>TODO LISTS</Text>
+      {todos.length > 0 && (
+        <View style={styles.inputWrapper}>
+          <TextInput
+            onChangeText={updateSearchHandler}
+            value={search}
+            style={styles.input}
+            placeholder="Search Todo"
+          />
+          <Button
+            title="+"
+            disabled={search.length === 0}
+            onPress={onSearchHandler}
+          />
+        </View>
+      )}
+
       <FlatList
         data={data}
         renderItem={({item}) => (
@@ -57,5 +86,25 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 10,
+  },
+  input: {
+    textAlign: 'center',
+    fontSize: 16,
+    width: '70%',
+    backgroundColor: 'grey',
+    color: 'white',
+
+    marginVertical: 15,
+    paddingVertical: 5,
+  },
+
+  inputWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 0,
+    padding: 0,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });
