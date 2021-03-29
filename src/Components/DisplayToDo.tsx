@@ -9,6 +9,7 @@ import {
   FlatList,
   TextInput,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 
 interface Styles {
@@ -25,6 +26,7 @@ interface IData {
   updateSearchHandler: (search: string) => void;
   onSearchHandler: () => void;
   todos: string[];
+  onDeleteHandler: (todo: string) => void;
 }
 
 export const DisplayTodo: React.FC<IData> = ({
@@ -33,6 +35,7 @@ export const DisplayTodo: React.FC<IData> = ({
   updateSearchHandler,
   onSearchHandler,
   todos,
+  onDeleteHandler,
 }) => {
   return (
     <View style={styles.mainWrapper}>
@@ -56,7 +59,9 @@ export const DisplayTodo: React.FC<IData> = ({
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <Text style={styles.textWrapper}>{item.todo}</Text>
+          <TouchableOpacity onPress={onDeleteHandler.bind(this, item.todo)}>
+            <Text style={styles.textWrapper}>{item.todo}</Text>
+          </TouchableOpacity>
         )}
       />
     </View>

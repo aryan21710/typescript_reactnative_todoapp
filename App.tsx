@@ -57,6 +57,14 @@ const App: React.FC = () => {
     }
   };
 
+  const onDeleteHandler = (todo: string) => {
+    const filteredTodo = todos.filter(_ => _ !== todo);
+    const filteredData = data.filter(_ => _.todo !== todo);
+
+    setToDos([...filteredTodo]);
+    setData([...filteredData]);
+  };
+
   const onSearchHandler = () => {
     if (search.length > 0) {
       searchTodo();
@@ -93,6 +101,7 @@ const App: React.FC = () => {
         updateSearchHandler={updateSearchHandler}
         onSearchHandler={onSearchHandler}
         todos={todos}
+        onDeleteHandler={onDeleteHandler}
       />
     </View>
   );

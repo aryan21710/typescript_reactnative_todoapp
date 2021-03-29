@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 
 import {
   StyleSheet,
@@ -25,9 +25,16 @@ export const Input: React.FC<IProps> = ({
   onChangeHandler,
   onClickHandler,
 }) => {
+  const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    inputRef.current && inputRef.current.focus();
+  }, []);
+
   return (
     <View style={styles.mainWrapper}>
       <TextInput
+        ref={inputRef}
         style={styles.inputWrapper}
         placeholderTextColor={'grey'}
         placeholder="Enter ToDo"
